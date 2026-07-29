@@ -1,0 +1,57 @@
+{
+  "name": "Social_Media_App",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "packages/*"
+    ],
+    "catalog": {
+      "dotenv": "^17.4.2",
+      "zod": "^4.4.3",
+      "@types/bun": "^1.3.14",
+      "@ts-rest/core": "^3.52.1",
+      "@reduxjs/toolkit": "^2.12.0",
+      "@types/node": "^26.1.1",
+      "tailwindcss": "^4.3.3",
+      "@prisma/client": "^7.8.0"
+    }
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "check-types": "turbo check-types",
+    "dev:web": "turbo -F web dev",
+    "dev:native": "turbo -F native dev",
+    "dev:server": "turbo -F server dev",
+    "db:push": "turbo -F @Social_Media_App/db db:push",
+    "db:studio": "turbo -F @Social_Media_App/db db:studio",
+    "db:generate": "turbo -F @Social_Media_App/db db:generate",
+    "db:migrate": "turbo -F @Social_Media_App/db db:migrate",
+    "db:start": "turbo -F @Social_Media_App/db db:start",
+    "db:watch": "turbo -F @Social_Media_App/db db:watch",
+    "db:stop": "turbo -F @Social_Media_App/db db:stop",
+    "db:down": "turbo -F @Social_Media_App/db db:down",
+    "lint:eslint": "eslint .",
+    "format:prettier": "prettier --write .",
+    "format:prettier:check": "prettier --check ."
+  },
+  "dependencies": {
+    "@Social_Media_App/env": "workspace:*",
+    "dotenv": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@Social_Media_App/config": "workspace:*",
+    "@eslint/js": "^10.0.1",
+    "@types/bun": "catalog:",
+    "eslint": "^10.7.0",
+    "globals": "^17.7.0",
+    "prettier": "^3.9.5",
+    "turbo": "^2.10.0",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.64.0"
+  },
+  "packageManager": "bun@1.3.14"
+}

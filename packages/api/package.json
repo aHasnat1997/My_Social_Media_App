@@ -1,0 +1,26 @@
+{
+  "name": "@Social_Media_App/api",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@Social_Media_App/db": "workspace:*",
+    "@Social_Media_App/env": "workspace:*",
+    "@ts-rest/core": "catalog:",
+    "dotenv": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@Social_Media_App/config": "workspace:*",
+    "typescript": "^6.0.3"
+  }
+}

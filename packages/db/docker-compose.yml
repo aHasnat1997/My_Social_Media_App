@@ -1,0 +1,23 @@
+name: Social_Media_App
+
+services:
+  postgres:
+    image: postgres
+    container_name: Social_Media_App-postgres
+    environment:
+      POSTGRES_DB: Social_Media_App
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - Social_Media_App_postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  Social_Media_App_postgres_data:
