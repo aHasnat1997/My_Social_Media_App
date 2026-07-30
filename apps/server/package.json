@@ -10,7 +10,6 @@
     "start": "bun run dist/index.js"
   },
   "dependencies": {
-    "@Social_Media_App/api": "workspace:*",
     "@Social_Media_App/db": "workspace:*",
     "@Social_Media_App/env": "workspace:*",
     "@aws-sdk/client-s3": "^3.1090.0",
@@ -18,8 +17,6 @@
     "@nestjs/common": "^11.1.28",
     "@nestjs/core": "^11.1.28",
     "@nestjs/platform-express": "^11.1.28",
-    "@ts-rest/core": "catalog:",
-    "@ts-rest/serverless": "^3.52.1",
     "bullmq": "^5.80.8",
     "dotenv": "catalog:",
     "express": "^5.2.1",

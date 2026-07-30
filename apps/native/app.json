@@ -5,12 +5,12 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "Social_Media_App",
+    "scheme": "social-media-app",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
+    // "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.betterfullstack.social_media_app"
+      "bundleIdentifier": "com.betterfullstack.socialmediaapp"
     },
     "android": {
       "adaptiveIcon": {
@@ -20,11 +20,7 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.betterfullstack.social_media_app"
-    },
-    "web": {
-      "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "package": "com.betterfullstack.socialmediaapp"
     },
     "plugins": [
       "expo-router",

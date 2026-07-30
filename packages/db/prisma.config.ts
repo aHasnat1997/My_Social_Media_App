@@ -1,17 +1,18 @@
 import dotenv from "dotenv";
 import path from "node:path";
-import { defineConfig, env } from "prisma/config";
+import { defineConfig } from "prisma/config";
 
-dotenv.config({
-  path: "../../apps/server/.env",
-});
+// In Docker the DATABASE_URL comes from env vars directly, .env file may not exist
+dotenv.config({ path: "../../apps/server/.env" });
 
 export default defineConfig({
   schema: path.join("prisma", "schema"),
   migrations: {
     path: path.join("prisma", "migrations"),
   },
-  datasource: {
-    url: env("DATABASE_URL"),
-  },
+  ...(process.env.DATABASE_URL && {
+    datasource: {
+      url: process.env.DATABASE_URL,
+    },
+  }),
 });

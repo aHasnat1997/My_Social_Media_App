@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import { Button, Chip, Spinner, Surface, useThemeColor } from "heroui-native";
+import { Chip, Spinner, Surface, useThemeColor } from "heroui-native";
 import { Text, View } from "react-native";
 
 import { Container } from "@/components/container";
@@ -8,8 +8,8 @@ export default function Home() {
   const successColor = useThemeColor("success");
   const dangerColor = useThemeColor("danger");
 
-  const isConnected = healthCheck?.data === "OK";
-  const isLoading = healthCheck?.isLoading;
+  const isConnected = false;
+  const isLoading = false;
 
   return (
     <Container className="p-4">

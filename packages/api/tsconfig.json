@@ -1,8 +1,0 @@
-{
-  "extends": "@Social_Media_App/config/tsconfig.base.json",
-  "compilerOptions": {
-    "outDir": "./dist",
-    "rootDir": "./src"
-  },
-  "include": ["src/**/*.ts"]
-}

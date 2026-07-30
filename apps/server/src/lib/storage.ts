@@ -17,14 +17,16 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
  * @see https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/s3/
  */
 export const s3Client = new S3Client({
-  region: process.env.AWS_S3_REGION!,
+  region: process.env.S3_REGION ?? "us-east-1",
+  endpoint: process.env.S3_ENDPOINT,
+  forcePathStyle: process.env.S3_FORCE_PATH_STYLE === "true",
   credentials: {
-    accessKeyId: process.env.AWS_S3_ACCESS_KEY_ID!,
-    secretAccessKey: process.env.AWS_S3_SECRET_ACCESS_KEY!,
+    accessKeyId: process.env.S3_ACCESS_KEY_ID!,
+    secretAccessKey: process.env.S3_SECRET_ACCESS_KEY!,
   },
 });
 
-const BUCKET_NAME = process.env.AWS_S3_BUCKET_NAME!;
+const BUCKET_NAME = process.env.S3_BUCKET_NAME!;
 
 /**
  * Storage utilities for common S3 operations
@@ -283,5 +285,6 @@ export async function getDownloadUrl(
  * Get the public URL for a file (only works if bucket/file has public access)
  */
 export function getPublicUrl(key: string): string {
-  return `https://${BUCKET_NAME}.s3.${process.env.AWS_S3_REGION}.amazonaws.com/${key}`;
+  const endpoint = process.env.S3_ENDPOINT ?? `https://s3.${process.env.S3_REGION}.amazonaws.com`;
+  return `${endpoint}/${BUCKET_NAME}/${key}`;
 }

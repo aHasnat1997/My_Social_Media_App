@@ -9,7 +9,7 @@ build
 *.tsbuildinfo
 
 # Environment variables
-.env
+# .env
 .env*.local
 
 # IDEs and editors
@@ -48,3 +48,5 @@ coverage
 .cache
 tmp
 temp
+
+.vscode

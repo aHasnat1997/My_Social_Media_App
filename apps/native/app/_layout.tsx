@@ -1,13 +1,16 @@
 import "@/global.css";
-import { QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Stack } from "expo-router";
 import { HeroUINativeProvider } from "heroui-native";
 import { useEffect } from "react";
 import { Platform } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { KeyboardProvider } from "react-native-keyboard-controller";
-
 import { AppThemeProvider } from "@/contexts/app-theme-context";
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { retry: 2, staleTime: 1000 * 60 } },
+});
+import "expo-dev-client";
 
 export const unstable_settings = {
   initialRouteName: "(drawer)",

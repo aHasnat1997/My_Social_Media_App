@@ -1,0 +1,11 @@
+node_modules
+**/node_modules
+**/.expo
+apps/native
+apps/web
+.turbo
+.git
+.gitignore
+*.md
+**/*.test.ts
+**/*.spec.ts
