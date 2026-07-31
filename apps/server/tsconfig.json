@@ -8,6 +8,8 @@
     },
     "jsx": "react-jsx",
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "verbatimModuleSyntax": false,
+    "types": ["bun", "multer"]
   }
 }

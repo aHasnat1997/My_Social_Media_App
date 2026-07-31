@@ -1,10 +1,122 @@
 generator client {
   provider = "prisma-client"
   output   = "../generated"
-  moduleFormat = "esm"
-  runtime = "bun"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+enum UserRole {
+  admin
+  user
+}
+
+model User {
+  id            String    @id @default(uuid())
+  username      String    @unique
+  email         String    @unique
+  passwordHash  String
+  avatarUrl     String?   @default("/placeholders/profile-placeholder.png")
+  fullName      String    @default("")
+  bio           String?
+  role          UserRole  @default(user)
+  isActive      Boolean   @default(true)
+  deletedAt     DateTime?
+  createdAt     DateTime  @default(now())
+
+  // Social Relations
+  posts         Post[]
+  likes         Like[]
+  comments      Comment[]
+  followers     Follow[]  @relation("following")
+  following     Follow[]  @relation("follower")
+  
+  // Auth Sessions & Notifications
+  userSessions  UserSession[]
+  recipientNotifications Notification[] @relation("RecipientNotifications")
+  senderNotifications    Notification[] @relation("SenderNotifications")
+  pushTokens    PushToken[]
+}
+
+model UserSession {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  token     String   @unique
+  device    String
+  ip        String
+  isActive  Boolean  @default(true)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+model Post {
+  id        String    @id @default(uuid())
+  authorId  String
+  author    User      @relation(fields: [authorId], references: [id])
+  content   String
+  mediaUrl  String?
+  likes     Like[]
+  comments  Comment[]
+  createdAt DateTime  @default(now())
+}
+
+model Like {
+  id        String   @id @default(uuid())
+  userId    String
+  postId    String?
+  commentId String?
+  user      User     @relation(fields: [userId], references: [id])
+  post      Post?    @relation(fields: [postId], references: [id], onDelete: Cascade)
+  comment   Comment? @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, postId])
+  @@unique([userId, commentId])
+}
+
+model Comment {
+  id              String    @id @default(uuid())
+  userId          String
+  postId          String
+  content         String
+  user            User      @relation(fields: [userId], references: [id])
+  post            Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
+  
+  // Nested Replies self-relation
+  parentId        String?
+  parentComment   Comment?  @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies         Comment[] @relation("CommentReplies")
+  
+  likes           Like[]
+  createdAt       DateTime  @default(now())
+}
+
+model Follow {
+  followerId  String
+  followingId String
+  follower    User @relation("follower", fields: [followerId], references: [id])
+  following   User @relation("following", fields: [followingId], references: [id])
+  @@id([followerId, followingId])
+}
+
+model PushToken {
+  id     String @id @default(uuid())
+  userId String
+  token  String @unique
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+model Notification {
+  id          String   @id @default(uuid())
+  recipientId String
+  recipient   User     @relation("RecipientNotifications", fields: [recipientId], references: [id])
+  senderId    String
+  sender      User     @relation("SenderNotifications", fields: [senderId], references: [id])
+  type        String   // "like_post", "like_comment", "comment", "reply"
+  postId      String?
+  commentId   String?
+  isRead      Boolean  @default(false)
+  createdAt   DateTime @default(now())
 }

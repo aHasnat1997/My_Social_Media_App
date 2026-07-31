@@ -1,0 +1,9 @@
+[serve]
+port = 5000
+
+[install]
+linker = "isolated"
+
+[transpiler]
+experimentalDecorators = true
+emitDecoratorMetadata = true
