@@ -18,8 +18,8 @@
   },
   "type": "module",
   "scripts": {
-    "dev": "node api.js && turbo dev",
-    "build": "node api.js && turbo build",
+    "dev": "turbo dev",
+    "build": "turbo build",
     "check-types": "turbo check-types",
     "dev:native": "turbo -F native dev",
     "dev:server": "turbo -F server dev",
